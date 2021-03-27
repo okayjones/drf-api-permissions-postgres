@@ -33,6 +33,9 @@ DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS = tuple(env.list('ALLOWED_HOSTS'))
 
+CORS_ORIGIN_WHITELIST = tuple(env.list('ALLOWED_ORIGINS'))
+
+CORS_ALLOW_ALL_ORIGINS = env.bool('ALLOW_ALL_ORIGINS')
 
 # Application definition
 
@@ -45,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'tasks',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -59,6 +63,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
